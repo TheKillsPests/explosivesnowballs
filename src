@@ -1,0 +1,25 @@
+package com.zatonexexplosivesnowballs.bukkit;
+
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Snowball;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class ZatonexXExplosiveSnowballs extends JavaPlugin implements Listener {
+
+	public void onEnable() {
+		getServer().getPluginManager().registerEvents(this, this);
+	}
+
+	@EventHandler
+	public void projectiles(ProjectileHitEvent event) {
+		Projectile projectile = event.getEntity();
+
+		if (projectile instanceof Snowball) {
+			Snowball snowball = (Snowball) projectile;
+			snowball.getWorld().createExplosion(snowball.getLocation(), 3F);
+			}
+		}
+	}
